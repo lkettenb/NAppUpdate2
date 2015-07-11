@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NAppUpdate - .NET Application Updater")]
+[assembly: AssemblyTitle("NAppUpdate2 - .NET Application Updater")]
 [assembly: AssemblyDescription("Library for easy and flexible integration of application update mechanism")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Itamar Syn-Hershko")]
-[assembly: AssemblyProduct("NAppUpdate")]
+[assembly: AssemblyProduct("NAppUpdate2")]
 [assembly: AssemblyCopyright("Copyright © 2010-2012 Itamar Syn-Hershko")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
