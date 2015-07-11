@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/robinwassen/NAppUpdate2</projectUrl>    
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <releaseNotes>Initial release of NuGet package.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>autoupdate updating</tags>
   </metadata>
