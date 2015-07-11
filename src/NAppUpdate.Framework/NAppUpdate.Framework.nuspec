@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Robin Andersson</authors>
+    <owners>Robin Andersson</owners>
+    <licenseUrl>https://github.com/robinwassen/NAppUpdate2/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/robinwassen/NAppUpdate2</projectUrl>    
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>autoupdate updating</tags>
+  </metadata>
+</package>
