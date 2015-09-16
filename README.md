@@ -18,6 +18,12 @@ How to contribute:
 1. Create an issue explaining the problem you solved
 2. Create a pull request that links to this issue
 
+## How to pack NuGet
+
+Run the following command in the NAppUpdate.Framework directory:
+
+    nuget pack -Prop Configuration=Release
+
 ## Old README
 
 User and developer discussion group is at http://groups.google.com/group/nappupdate
