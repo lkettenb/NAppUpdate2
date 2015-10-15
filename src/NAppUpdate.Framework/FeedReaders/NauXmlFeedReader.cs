@@ -4,6 +4,7 @@ using System.Xml;
 
 using NAppUpdate.Framework.Tasks;
 using NAppUpdate.Framework.Conditions;
+using System.IO;
 
 namespace NAppUpdate.Framework.FeedReaders
 {
@@ -12,9 +13,9 @@ namespace NAppUpdate.Framework.FeedReaders
         private Dictionary<string, Type> _updateConditions { get; set; }
         private Dictionary<string, Type> _updateTasks { get; set; }
 
-    	#region IUpdateFeedReader Members
+        #region IUpdateFeedReader Members
 
-        public IList<IUpdateTask> Read(string feed)
+        public IList<IUpdateTask> Read(Stream feed)
         {
             // Lazy-load the Condition and Task objects contained in this assembly, unless some have already
             // been loaded (by a previous lazy-loading in a call to Read, or by an explicit loading)
@@ -28,14 +29,14 @@ namespace NAppUpdate.Framework.FeedReaders
             List<IUpdateTask> ret = new List<IUpdateTask>();
 
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(feed);
+            doc.Load(feed);
 
             // Support for different feed versions
             XmlNode root = doc.SelectSingleNode(@"/Feed[version=""1.0""] | /Feed") ?? doc;
 
             if (root.Attributes["BaseUrl"] != null && !string.IsNullOrEmpty(root.Attributes["BaseUrl"].Value))
                 UpdateManager.Instance.BaseUrl = root.Attributes["BaseUrl"].Value;
-			
+
             // Temporary collection of attributes, used to aggregate them all with their values
             // to reduce Reflection calls
             Dictionary<string, string> attributes = new Dictionary<string, string>();
@@ -79,14 +80,14 @@ namespace NAppUpdate.Framework.FeedReaders
                         IUpdateCondition conditionObject = ReadCondition(node["Conditions"]);
                         if (conditionObject != null)
                         {
-                        	var boolCond = conditionObject as BooleanCondition;
-							if (boolCond != null)
-								task.UpdateConditions = boolCond;
-							else
-							{
-								if (task.UpdateConditions == null) task.UpdateConditions = new BooleanCondition();
-								task.UpdateConditions.AddCondition(conditionObject);
-							}
+                            var boolCond = conditionObject as BooleanCondition;
+                            if (boolCond != null)
+                                task.UpdateConditions = boolCond;
+                            else
+                            {
+                                if (task.UpdateConditions == null) task.UpdateConditions = new BooleanCondition();
+                                task.UpdateConditions.AddCondition(conditionObject);
+                            }
                         }
                     }
                 }

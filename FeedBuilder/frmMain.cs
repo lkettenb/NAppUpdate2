@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Timers;
@@ -367,7 +368,10 @@ namespace FeedBuilder
                 //}
             }
             feed.AppendChild(tasks);
-            doc.Save(txtFeedXML.Text.Trim());
+            using (TextWriter sw = new StreamWriter(txtFeedXML.Text.Trim(), false, new UTF8Encoding(false)))
+            {
+                doc.Save(sw);
+            }
 
             // open the outputs folder if we're running from the GUI or 
             // we have an explicit command line option to do so

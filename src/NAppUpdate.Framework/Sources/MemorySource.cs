@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using NAppUpdate.Framework.Common;
+using System.IO;
 
 namespace NAppUpdate.Framework.Sources
 {
-    public class MemorySource : IUpdateSource
+    public class MemorySource : IUpdateSource, IDisposable
     {
         private readonly Dictionary<Uri, string> tempFiles;
 
-        public MemorySource(string feedString)
+        public MemorySource(Stream feed)
         {
-            this.Feed = feedString;
+            this.Feed = feed;
             this.tempFiles = new Dictionary<Uri, string>();
         }
 
-        public string Feed { get; set; }
+        public Stream Feed { get; set; }
 
         public void AddTempFile(Uri uri, string path)
         {
@@ -23,13 +24,13 @@ namespace NAppUpdate.Framework.Sources
 
         #region IUpdateSource Members
 
-        public string GetUpdatesFeed()
+        public Stream GetUpdatesFeed()
         {
             return Feed;
         }
 
-		public bool GetData(string filePath, string basePath, Action<UpdateProgressInfo> onProgress, ref string tempFile)
-    	{
+        public bool GetData(string filePath, string basePath, Action<UpdateProgressInfo> onProgress, ref string tempFile)
+        {
             Uri uriKey = null;
 
             if (Uri.IsWellFormedUriString(filePath, UriKind.Absolute))
@@ -46,5 +47,16 @@ namespace NAppUpdate.Framework.Sources
         }
 
         #endregion
+
+
+        public void CloseStream()
+        {
+            if (Feed != null) Feed.Close();
+        }
+
+        public void Dispose()
+        {
+            if (Feed != null) Feed.Dispose();
+        }
     }
 }

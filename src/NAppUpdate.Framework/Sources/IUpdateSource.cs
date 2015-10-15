@@ -1,11 +1,13 @@
 ﻿using System;
 using NAppUpdate.Framework.Common;
+using System.IO;
 
 namespace NAppUpdate.Framework.Sources
 {
     public interface IUpdateSource
     {
-        string GetUpdatesFeed(); // TODO: return a the feed as a stream
+        Stream GetUpdatesFeed();
+        void CloseStream();
 		bool GetData(string filePath, string basePath, Action<UpdateProgressInfo> onProgress, ref string tempLocation);
     }
 }

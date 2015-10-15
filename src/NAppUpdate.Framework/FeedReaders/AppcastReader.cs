@@ -2,6 +2,7 @@ using System.Xml;
 using System.Collections.Generic;
 using NAppUpdate.Framework.Tasks;
 using NAppUpdate.Framework.Conditions;
+using System.IO;
 
 namespace NAppUpdate.Framework.FeedReaders
 {
@@ -11,10 +12,10 @@ namespace NAppUpdate.Framework.FeedReaders
 
         #region IUpdateFeedReader Members
 
-        public IList<IUpdateTask> Read(string feed)
+        public IList<IUpdateTask> Read(Stream feed)
         {
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(feed);
+            doc.Load(feed);
             XmlNodeList nl = doc.SelectNodes("/rss/channel/item");
 
             List<IUpdateTask> ret = new List<IUpdateTask>();
